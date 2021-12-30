@@ -3,7 +3,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
+const Home: NextPage = (props: any) => {
+  console.log(props?.data);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -31,8 +33,6 @@ const Home: NextPage = () => {
 }
 
 export const getServerSideProps = async() => {
-  // console.log(process.env["X-CMC_PRO_API_KEY"]?.charAt(0))
-
   const res = await fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest', {
     method: 'GET',
     headers: {
@@ -40,10 +40,14 @@ export const getServerSideProps = async() => {
     }
   })
 
-  console.log(await res.json())
+  const latestPrices = await res.json();
+
+  // console.log(latestPrices.data[0]?.quote)
 
   return {
-    props: {},
+    props: {
+      data: latestPrices,
+    },
   }
 }
 
