@@ -1,28 +1,37 @@
 import ReactChart from 'echarts-for-react'
-
 import React from 'react'
 
-const BubbleChart = () => {
+interface BubbleChartProps {
+  [key: string]: any;
+}
+
+// function BubbleChart({ data }: BubbleChartProps) {
+  const BubbleChart: React.FC<BubbleChartProps> = ({ data }) => {
   const [ option, setOption ] = React.useState({})
 
+  // console.log("DATA", data);
+
   React.useEffect(() => {
+    const nodes: any[] = [];
+
+    data.data.forEach((o: any) => {
+      nodes.push({
+        id: o.name,
+        symbolSize: o.quote["USD"].market_cap / 10000000000,
+      })
+
+    });
+
     const bubbleChartOptions = {
       series: [
         {
           type: 'graph',
           layout: 'force',
-          data: [
-            {
-              id: "test",
-              symbolSize: 30,
-              itemStyle: {
-                color: "#000",
-              }
-            }
-          ]
-        }
-      ]
-    }
+          data: nodes,
+        },
+      ],
+    };
+
     setOption(bubbleChartOptions)
 
   }, [])
