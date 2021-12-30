@@ -15,10 +15,13 @@ interface BubbleChartProps {
     const nodes: any[] = [];
 
     data.data.forEach((o: any) => {
-      nodes.push({
-        id: o.name,
-        symbolSize: o.quote["USD"].market_cap / 10000000000,
-      })
+      if ( o.quote["USD"].market_cap > 10000000000 ) {
+        nodes.push({
+          id: o.name,
+          name: o.name,
+          symbolSize: o.quote["USD"].market_cap / 10000000000,
+        })
+      }
 
     });
 
@@ -28,6 +31,11 @@ interface BubbleChartProps {
           type: 'graph',
           layout: 'force',
           data: nodes,
+          label: {
+            show: true,
+            fontSize: '.6rem',
+            color: '#373737'
+          }
         },
       ],
     };
