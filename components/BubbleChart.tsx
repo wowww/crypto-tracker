@@ -14,6 +14,10 @@ const BubbleChart = () => {
           data: [
             {
               id: "test",
+              symbolSize: 30,
+              itemStyle: {
+                color: "#000",
+              }
             }
           ]
         }
