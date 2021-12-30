@@ -18,7 +18,7 @@ const Home: NextPage = (props: any) => {
       <main className={styles.main}>
         <section className={styles.bubblechart__wrapper}>
           <h1>Bubble Chart</h1>
-          <BubbleChart />
+          <BubbleChart data={props.data} />
         </section>
       </main>
     </div>
